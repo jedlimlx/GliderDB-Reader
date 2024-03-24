@@ -76,7 +76,7 @@ import r2_moore_oscillators from '/src/assets/R2-C2-NM-oscillators.db.txt?raw'
 import r1_neumann_gliders from '/src/assets/R1-C2-NN-gliders.db.txt?raw'
 import r2_neumann_gliders from '/src/assets/R2-C2-NN-gliders.db.txt?raw'
 
-import r1_hexagonal_gliders from '/src/assets/R1-C2-NH-gliders.db.txt'
+import r1_hexagonal_gliders from '/src/assets/R1-C2-NH-gliders.db.txt?raw'
 
 const speed = ref("")
 const rule = ref("")
