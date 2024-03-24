@@ -76,6 +76,8 @@ import r2_moore_oscillators from '/src/assets/R2-C2-NM-oscillators.db.txt?raw'
 import r1_neumann_gliders from '/src/assets/R1-C2-NN-gliders.db.txt?raw'
 import r2_neumann_gliders from '/src/assets/R2-C2-NN-gliders.db.txt?raw'
 
+import r1_hexagonal_gliders from '/src/assets/R1-C2-NH-gliders.db.txt'
+
 const speed = ref("")
 const rule = ref("")
 const output = ref("Awaiting user input...")  // For 5S
@@ -265,7 +267,8 @@ const readGliderDB = function() {
         "R2-C2-NM-gliders": r2_moore_gliders,
         "R2-C2-NM-oscillators": r2_moore_oscillators,
         "R1-C2-NN-gliders": r1_neumann_gliders,
-        "R2-C2-NN-gliders": r2_neumann_gliders
+        "R2-C2-NN-gliders": r2_neumann_gliders,
+        "R1-C2-NH-gliders": r1_hexagonal_gliders
     }
     if (dx === 0 && dy === 0) database_name = `R${range}-C${numStates}-N${neighbourhood}-oscillators`
     else database_name = `R${range}-C${numStates}-N${neighbourhood}-gliders`
