@@ -67,7 +67,7 @@ import oblique from '/src/assets/oblique.sss.txt?raw'
 import diagonal from '/src/assets/diagonal.sss.txt?raw'
 import orthogonal from '/src/assets/orthogonal.sss.txt?raw'
 
-import r1_moore_gliders from '/src/assets/R1-C2-NM-gliders.db.txt?raw'
+import string from '@/gliderdb'
 import r1_moore_oscillators from '/src/assets/R1-C2-NM-oscillators.db.txt?raw'
 import r1_c3_moore_gliders from '/src/assets/R1-C3-NM-gliders.db.txt?raw'
 import r2_moore_gliders from '/src/assets/R2-C2-NM-gliders.db.txt?raw'
@@ -77,6 +77,8 @@ import r1_neumann_gliders from '/src/assets/R1-C2-NN-gliders.db.txt?raw'
 import r2_neumann_gliders from '/src/assets/R2-C2-NN-gliders.db.txt?raw'
 
 import r1_hexagonal_gliders from '/src/assets/R1-C2-NH-gliders.db.txt?raw'
+
+//const r1_moore_gliders = string
 
 const speed = ref("")
 const rule = ref("")
@@ -261,7 +263,7 @@ const readGliderDB = function() {
     // Choose the correct database
     let database_name = ""
     let db_lookup: any = {
-        "R1-C2-NM-gliders": r1_moore_gliders,
+        //"R1-C2-NM-gliders": r1_moore_gliders,
         "R1-C2-NM-oscillators": r1_moore_oscillators,
         "R1-C3-NM-gliders": r1_c3_moore_gliders,
         "R2-C2-NM-gliders": r2_moore_gliders,
