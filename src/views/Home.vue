@@ -1,14 +1,20 @@
 <template>
     <VCard tag='b' style="margin: 60px; padding: 40px" color="#fbfbfb">
         <h1 style="font-size: 25px;">5S / SOSSP Database</h1><br>
+        <VCheckbox
+            label="B0?"
+            v-model="b0"
+            color="primary"
+        />
         <VTextField
             class="mb-4"
             label="Speed / Period"
             placeholder="Enter Spaceship Speed / Oscillator Period"
             v-model="speed"
+            color="primary"
             :rules="[value => /^(P?[0-9]+|(\([0-9]+,[0-9]+\)|[0-9]*)c(\/[0-9]+[od]?)?)$/.test(value)]"
         />
-        <v-btn @click="read5SDatabase"> Confirm </v-btn><br><br><br><br>
+        <v-btn @click="read5SDatabase" color="primary"> Confirm </v-btn><br><br><br><br>
         <code style="background: #f0f0f0; padding: 10px; display: block; white-space: pre-wrap; font-weight: normal">
             {{ output }}
         </code>
@@ -36,17 +42,19 @@
             label="Speed / Period"
             placeholder="Enter Spaceship Speed / Oscillator Period"
             v-model="speed"
+            color="primary"
             :rules="[value => /^(P?[0-9]+|(\([0-9]+,[ ]*[0-9]+\)|[0-9]*)c(\/[0-9]+[od]?)?)$/.test(value)]"
         />
-        <VCheckbox v-model="ignoreVelocity" :label=label1 /><br><br>
+        <VCheckbox v-model="ignoreVelocity" :label=label1 color="primary"/><br><br>
         <VTextField
             class="mb-4"
             label="Rule"
             placeholder="Enter the rule to search in"
             v-model="rule"
+            color="primary"
         />
-        <VCheckbox v-model="ignoreRule" :label=label2 /><br><br>
-        <v-btn @click="readGliderDB"> Confirm </v-btn><br><br><br><br>
+        <VCheckbox v-model="ignoreRule" :label=label2 color="primary"/><br><br>
+        <v-btn @click="readGliderDB" color="primary"> Confirm </v-btn><br><br><br><br>
 
         <VList v-for="(glider, index) in gliders" :key="index" style="width:100%">
             <code
@@ -67,7 +75,11 @@ import oblique from '/src/assets/oblique.sss.txt?raw'
 import diagonal from '/src/assets/diagonal.sss.txt?raw'
 import orthogonal from '/src/assets/orthogonal.sss.txt?raw'
 
-import string from '@/gliderdb'
+import b0_oblique from '/src/assets/b0_oblique.sss.txt?raw'
+import b0_diagonal from '/src/assets/b0_diagonal.sss.txt?raw'
+import b0_orthogonal from '/src/assets/b0_orthogonal.sss.txt?raw'
+
+import r1_moore_gliders from '/src/assets/R1-C2-NM-gliders.db.txt?raw'
 import r1_moore_oscillators from '/src/assets/R1-C2-NM-oscillators.db.txt?raw'
 import r1_c3_moore_gliders from '/src/assets/R1-C3-NM-gliders.db.txt?raw'
 import r2_moore_gliders from '/src/assets/R2-C2-NM-gliders.db.txt?raw'
@@ -77,8 +89,6 @@ import r1_neumann_gliders from '/src/assets/R1-C2-NN-gliders.db.txt?raw'
 import r2_neumann_gliders from '/src/assets/R2-C2-NN-gliders.db.txt?raw'
 
 import r1_hexagonal_gliders from '/src/assets/R1-C2-NH-gliders.db.txt?raw'
-
-//const r1_moore_gliders = string
 
 const speed = ref("")
 const rule = ref("")
@@ -95,13 +105,17 @@ const label1 = ref("Ignore Velocity")
 const label2 = ref("Ignore Rule")
 const ignoreVelocity = ref(false)
 const ignoreRule = ref(false)
+const b0 = ref(false)
 
 const insertNewLine = function(string: string, maxLength: number): string {
     let newString = []
+    let delay = 0
     for (let i = 0; i < string.length; i++) {
         newString.push(string[i])
-        if (i % maxLength === 0 && i !== 0) {
-            newString.push("\n")
+        if ((i - delay) % maxLength === 0 && i !== 0) {
+            if (isNaN(parseInt(string[i]))) {
+                newString.push("\n")
+            } else delay++
         }
     }
 
@@ -234,9 +248,15 @@ const read5SDatabase = function() {
 
     let db = ""
     if (dx === 0 && dy === 0) db = oscillators
-    else if (dy === 0) db = orthogonal
-    else if (dx === dy) db = diagonal
-    else db = oblique
+    else if (!b0.value) {
+        if (dy === 0) db = orthogonal
+        else if (dx === dy) db = diagonal
+        else db = oblique
+    } else {
+        if (dy === 0) db = b0_orthogonal
+        else if (dx === dy) db = b0_diagonal
+        else db = b0_oblique
+    }
 
     // Iterate through
     let tokens
@@ -263,7 +283,7 @@ const readGliderDB = function() {
     // Choose the correct database
     let database_name = ""
     let db_lookup: any = {
-        //"R1-C2-NM-gliders": r1_moore_gliders,
+        "R1-C2-NM-gliders": r1_moore_gliders,
         "R1-C2-NM-oscillators": r1_moore_oscillators,
         "R1-C3-NM-gliders": r1_c3_moore_gliders,
         "R2-C2-NM-gliders": r2_moore_gliders,
@@ -310,7 +330,7 @@ const readGliderDB = function() {
                         `#C Min Rule: ${tokens[2]}\n` +
                         `#C Max Rule: ${tokens[3]}\n` +
                         `x = ${tokens[7]}, y = ${tokens[8]}, rule = ${ignoreRule.value ? tokens[2] : rule.value}\n` +
-                        insertNewLine(tokens[9], 100)
+                        insertNewLine(tokens[9], 70)
                 })
             }
         }
