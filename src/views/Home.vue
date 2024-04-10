@@ -324,7 +324,7 @@ const readGliderDB = function() {
                 || ignoreRule.value) {
                 gliders.value.push({
                     rle: (dx === 0 && dy === 0 ? `#C P${tokens[4]}\n` :
-                            `#C (${tokens[5]}, ${tokens[6]})/${tokens[4]}\n`) +
+                            `#C (${tokens[5]}, ${tokens[6]})c/${tokens[4]}\n`) +
                         (tokens[0] !== "" ? `#C Name: ${tokens[0]}\n` : '') +
                         (tokens[1] !== "" ? `#C Discovered by: ${tokens[1]}\n` : '') +
                         `#C Min Rule: ${tokens[2]}\n` +
