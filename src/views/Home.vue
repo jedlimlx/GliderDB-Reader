@@ -70,25 +70,25 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import oscillators from '/public/sossp.sss.txt?raw'
-import oblique from '/public/oblique.sss.txt?raw'
-import diagonal from '/public/diagonal.sss.txt?raw'
-import orthogonal from '/public/orthogonal.sss.txt?raw'
+import oscillators from '/src/assets/sossp.sss.txt?raw'
+import oblique from '/src/assets/oblique.sss.txt?raw'
+import diagonal from '/src/assets/diagonal.sss.txt?raw'
+import orthogonal from '/src/assets/orthogonal.sss.txt?raw'
 
-import b0_oblique from '/public/b0_oblique.sss.txt?raw'
-import b0_diagonal from '/public/b0_diagonal.sss.txt?raw'
-import b0_orthogonal from '/public/b0_orthogonal.sss.txt?raw'
+import b0_oblique from '/src/assets/b0_oblique.sss.txt?raw'
+import b0_diagonal from '/src/assets/b0_diagonal.sss.txt?raw'
+import b0_orthogonal from '/src/assets/b0_orthogonal.sss.txt?raw'
 
-import r1_moore_gliders from '/public/R1-C2-NM-gliders.db.txt?raw'
-import r1_moore_oscillators from '/public/R1-C2-NM-oscillators.db.txt?raw'
-import r1_c3_moore_gliders from '/public/R1-C3-NM-gliders.db.txt?raw'
-import r2_moore_gliders from '/public/R2-C2-NM-gliders.db.txt?raw'
-import r2_moore_oscillators from '/public/R2-C2-NM-oscillators.db.txt?raw'
+import r1_moore_gliders from '/src/assets/R1-C2-NM-gliders.db.txt?raw'
+import r1_moore_oscillators from '/src/assets/R1-C2-NM-oscillators.db.txt?raw'
+import r1_c3_moore_gliders from '/src/assets/R1-C3-NM-gliders.db.txt?raw'
+import r2_moore_gliders from '/src/assets/R2-C2-NM-gliders.db.txt?raw'
+import r2_moore_oscillators from '/src/assets/R2-C2-NM-oscillators.db.txt?raw'
 
-import r1_neumann_gliders from '/public/R1-C2-NN-gliders.db.txt?raw'
-import r2_neumann_gliders from '/public/R2-C2-NN-gliders.db.txt?raw'
+import r1_neumann_gliders from '/src/assets/R1-C2-NN-gliders.db.txt?raw'
+import r2_neumann_gliders from '/src/assets/R2-C2-NN-gliders.db.txt?raw'
 
-import r1_hexagonal_gliders from '/public/R1-C2-NH-gliders.db.txt?raw'
+import r1_hexagonal_gliders from '/src/assets/R1-C2-NH-gliders.db.txt?raw'
 
 const speed = ref("")
 const rule = ref("")
