@@ -1,0 +1,3 @@
+[submodule "src/assets/HROT-Glider-DB"]
+	path = src/assets/HROT-Glider-DB
+	url = https://github.com/jedlimlx/HROT-Glider-DB
